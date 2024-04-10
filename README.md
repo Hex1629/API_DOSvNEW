@@ -2,7 +2,7 @@
 There are my simple api for "denial of service"
 
 INSTALL in VPS
-```curl -O https://raw.githubusercontent.com/Hex1629/INSTALL_MYPROJECT/main/INSTALL_SCRIPT/vps.sh && bash vps.sh && apt-get install update && apt-get install upgrade && apt install python3 && apt install python && apt install git  && pip install PySocks && pip install requests && pip install flask && sudo apt install git && apt install git && git clone https://github.com/Hex1629/API_DOSvNEW/ && cd API_DOSvNEW && python main.py```
+```apt install -y python-is-python3 python3-pip python3 git && apt-get install update -y && apt-get install upgrade -y && pip install PySocks && pip install requests && pip install flask && git clone https://github.com/Hex1629/API_DOSvNEW/ && cd API_DOSvNEW && python main.py```
 
 INSTALL in REPLIT
 ```pip install PySocks && pip install requests && pip install flask && git clone https://github.com/Hex1629/API_DOSvNEW/ && cd API_DOSvNEW && python main.py```
