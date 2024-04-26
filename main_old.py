@@ -10,20 +10,23 @@ def api_sender(links,opt):
  except Exception as e:print(e)
 
 headers = {}
-print("HTTP-19, BROWSER, HANDSHAKE, AMP, MURD-OPT, RAPID-FAST, MURD")
+https = ['BROWSER','HANDSHAKE','AMP','MURD-OPT','RAPID-FAST','MURD','COOKIE2','COOKIE']
+print(f'HTTP-19, {", ".join(https)}')
 methods = input("Methods ?")
 hostname = input("Target ?")
 scheme = ''
 ports = 80
 proxy = ''
 links = ''
-if methods.upper() in ['BROWSER','HANDSHAKE','AMP','MURD-OPT','RAPID-FAST','MURD']:
+if methods.upper() in https:
    parsed_url = urlparse(hostname)
    hostname = parsed_url.hostname
    scheme = parsed_url.scheme
    links = parsed_url.path or '/'
 if methods.upper() == 'BROWSER':
    proxy = input("Type None SOCKS5 SOCKS4 HTTP HTTPS ?")
+elif methods.upper() in ['COOKIE', 'COOKIE2']:
+   proxy = input("Type OPT 0,1 ?")
 if methods.upper() == 'HTTP-19':
    ports = int(input("Ports ?"))
 meth_http = input("HTTP-METHODS GET, POST and etc ?")
