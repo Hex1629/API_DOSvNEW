@@ -83,7 +83,7 @@ def list_update():
     print(f"[{epoch_to_datetime(datetime_to_epoch())}] DOWNLOAD JSON DONE . . .")
     error = link("a")
     for a in data["LIST"].keys():
-        files_c = a
+       files_c = a
        if "." not in a:
         name = ''
         path = []
