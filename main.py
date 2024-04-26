@@ -83,10 +83,20 @@ def list_update():
     print(f"[{epoch_to_datetime(datetime_to_epoch())}] DOWNLOAD JSON DONE . . .")
     error = link("a")
     for a in data["LIST"].keys():
+        files_c = a
+       if "." not in a:
+        name = ''
+        lst = data['LIST'][a].split("/")
+        c = 0
+        while True:
+         try:
+           name = lst[c]; c += 1
+         except:break
+        files_c = name
        files = link(data['LIST'][a])
        if files == error:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
        else:
-           if hash_checked(files,read(files)) == False:threading.Thread(target=write,args=(files,files)).start(); print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . ."); c = 1
+           if hash_checked(files,read(files_c)) == False:threading.Thread(target=write,args=(files_c,files)).start(); print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . ."); c = 1
     if c == 1:return True
 
 if list_update() == True:print("RESTART PROGRAM!")
