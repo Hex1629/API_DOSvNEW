@@ -26,7 +26,7 @@ if methods.upper() in https:
 if methods.upper() == 'BROWSER':
    proxy = input("Type None SOCKS5 SOCKS4 HTTP HTTPS ?")
 elif methods.upper() in ['COOKIE', 'COOKIE2']:
-   print('URL __cf_chl_tk,__cf_chl_rt_tk,__cf_chl_f_tk,__cf_chl_captcha_tk__,__cf_chl_managed_tk__,__cf_chl_jschl_tk__')
+   print('URL CF __cf_chl_tk,__cf_chl_rt_tk,__cf_chl_f_tk,__cf_chl_captcha_tk__,__cf_chl_managed_tk__,__cf_chl_jschl_tk__')
    proxy = input("Type OPT 0-6 ?")
 if methods.upper() == 'HTTP-19':
    ports = int(input("Ports ?"))
