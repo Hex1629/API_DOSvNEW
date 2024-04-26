@@ -86,13 +86,15 @@ def list_update():
         files_c = a
        if "." not in a:
         name = ''
+        path = []
         lst = data['LIST'][a].split("/")
         c = 0
         while True:
          try:
+           path.append(lst[c])
            name = lst[c]; c += 1
          except:break
-        files_c = name
+        files_c = '/'.join(path)+'/'+name
        files = link(data['LIST'][a])
        if files == error:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
        else:
