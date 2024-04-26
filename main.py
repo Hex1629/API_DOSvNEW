@@ -37,4 +37,58 @@ def req(TARGET, TIME, THREAD, METHODS):
         return f'{METHODS} {THREAD}/{TIME}s HTTP={meth_opt} --> {TARGET}'
     else:return 'IDK'
 
-app.run('0.0.0.0')
+import requests,json,datetime,hashlib
+
+def datetime_to_epoch():
+    date_string = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    date_obj = datetime.datetime.strptime(date_string, "%Y-%m-%d %H:%M:%S")
+    return int(date_obj.timestamp())
+
+def epoch_to_datetime(epoch_time):
+    datetime_obj = datetime.datetime.fromtimestamp(epoch_time)
+    return datetime_obj.strftime('%Y-%m-%d %H:%M:%S')
+
+def link(path):return requests.get(f"https://raw.githubusercontent.com/Tool-Free/api_assets/main{path}").content
+
+def read(path):
+  try:
+   with open(path,'r') as f:return f.read()
+  except:
+    try:
+      with open(path,'rb') as f:return f.read()
+    except:return False
+
+def write(path,contents):
+  try:
+   with open(path,'w') as f:f.write(contents)
+  except:
+    with open(path,'wb') as f:f.write(contents)
+
+def hash_checked(data,data2):
+  try:update_data = hashlib.sha256(data.encode()).hexdigest()
+  except:update_data = hashlib.sha256(data).hexdigest()
+  if data2 != False:
+   try:current_data = hashlib.sha256(data2.encode()).hexdigest()
+   except:current_data = hashlib.sha256(data2).hexdigest()
+   if current_data == update_data:return True
+  return False
+
+def list_update():
+    c = 0
+    while True:
+     try:
+        data = json.loads(link("/lst.json").decode()); break
+     except Exception as e:
+        print(f"[{epoch_to_datetime(datetime_to_epoch())}] REASON={e} ERROR CONTACT t.me/IDKOTHERHEX1629 FOR CHECK . . .")
+    print(f"[{epoch_to_datetime(datetime_to_epoch())}] DOWNLOAD JSON DONE . . .")
+    error = link("a")
+    for a in data["LIST"].keys():
+       files = link(data['LIST'][a])
+       if files == error:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
+       else:
+           if hash_checked(files,read(files)) == False:threading.Thread(target=write,args=(files,files)).start(); print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . ."); c = 1
+    if c == 1:return True
+
+if list_update() == True:print("RESTART PROGRAM!")
+else:
+ app.run('0.0.0.0')
