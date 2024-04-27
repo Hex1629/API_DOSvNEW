@@ -8,7 +8,7 @@ INSTALL in REPLIT
 ```pip install PySocks && pip install requests && pip install flask && git clone https://github.com/Hex1629/API_DOSvNEW/ && cd API_DOSvNEW && python main.py```
 
 UPDATE SRC
-```curl -O https://raw.githubusercontent.com/Hex1629/API_DOSvNEW/main/main.py && python main.py```
+```cd API_DOSvNEW && curl -O https://raw.githubusercontent.com/Hex1629/API_DOSvNEW/main/main.py && python main.py```
 
 # HOW TO RUNNING
 
