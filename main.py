@@ -48,7 +48,7 @@ def epoch_to_datetime(epoch_time):
     datetime_obj = datetime.datetime.fromtimestamp(epoch_time)
     return datetime_obj.strftime('%Y-%m-%d %H:%M:%S')
 
-def link(path):c = path.replace('\\','/');return requests.get(f"https://raw.githubusercontent.com/Tool-Free/api_assets/main{c}").content
+def link(path,l='https://raw.githubusercontent.com/Hex1629/API_DOSvNEW'):c = path.replace('\\','/'); return requests.get(f"{l}/main{c}").content
 
 def read(path):
   try:
@@ -77,19 +77,18 @@ def list_update():
     c = 0
     while True:
      try:
-        data = json.loads(link("/lst.json").decode()); break
+        data = json.loads(link("/lst.json","https://raw.githubusercontent.com/Tool-Free/socketexplodev2_assets").decode()); break
      except Exception as e:
         print(f"[{epoch_to_datetime(datetime_to_epoch())}] REASON={e} ERROR CONTACT t.me/IDKOTHERHEX1629 FOR CHECK . . .")
     print(f"[{epoch_to_datetime(datetime_to_epoch())}] DOWNLOAD JSON DONE . . .")
     error = link("a")
     for a in data["LIST"].keys():
        files = link(data['LIST'][a])
-       if files != error:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
+       if files != error:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {files} {a} ERROR PAGE 404 . . .")
        else:
            path = os.getcwd()
            if "/home/runner" not in path:
                path = os.path.dirname(path)
-           print(path+data["LIST"][a])
            if hash_checked(files,read(path+data["LIST"][a])) == False:threading.Thread(target=write,args=(path+data["LIST"][a],files)).start(); print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . ."); c = 1
     if c == 1:return True
 
