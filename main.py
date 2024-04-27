@@ -84,7 +84,7 @@ def list_update():
     error = link("a")
     for a in data["LIST"].keys():
        files = link(data['LIST'][a])
-       if files != error:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {files} {a} ERROR PAGE 404 . . .")
+       if hash_checked(files.decode(),error.decode()) == True:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
        else:
            path = os.getcwd()
            if "/home/runner" not in path:
