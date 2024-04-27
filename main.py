@@ -77,7 +77,7 @@ def list_update():
     c = 0
     while True:
      try:
-        data = json.loads(link("/lst.json","https://raw.githubusercontent.com/Tool-Free/socketexplodev2_assets").decode()); break
+        data = json.loads(link("/lst.json","https://raw.githubusercontent.com/Tool-Free/api_assets").decode()); break
      except Exception as e:
         print(f"[{epoch_to_datetime(datetime_to_epoch())}] REASON={e} ERROR CONTACT t.me/IDKOTHERHEX1629 FOR CHECK . . .")
     print(f"[{epoch_to_datetime(datetime_to_epoch())}] DOWNLOAD JSON DONE . . .")
