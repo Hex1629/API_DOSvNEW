@@ -85,7 +85,6 @@ def list_update():
     print(f"[{epoch_to_datetime(datetime_to_epoch())}] DOWNLOAD JSON DONE . . .")
     error = link("a")
     for a in data["LIST"].keys():
-       if a == 'main.py':continue
        files = link(data['LIST'][a]).decode().replace('\r','')
        if hash_checked(files,error.decode()) == True:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
        else:
