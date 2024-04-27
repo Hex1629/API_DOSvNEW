@@ -52,17 +52,19 @@ def link(path,l='https://raw.githubusercontent.com/Hex1629/API_DOSvNEW'):c = pat
 
 def read(path):
   try:
-   with open(path,'r') as f:return f.read()
+   with open(path,'r') as f:return f.read(),'R'; print("r")
   except:
     try:
-      with open(path,'rb') as f:return f.read()
+      with open(path,'rb') as f:return f.read(),'RB'; print("RB")
     except:return False
 
 def write(path,contents):
   try:
    with open(path,'w') as f:f.write(contents)
   except:
-    with open(path,'wb') as f:f.write(contents)
+    try:
+      with open(path,'wb') as f:f.write(contents)
+    except Exception as e:print(e)
 
 def hash_checked(data,data2):
   try:update_data = hashlib.sha256(data.encode()).hexdigest()
@@ -83,11 +85,19 @@ def list_update():
     print(f"[{epoch_to_datetime(datetime_to_epoch())}] DOWNLOAD JSON DONE . . .")
     error = link("a")
     for a in data["LIST"].keys():
-       files = link(data['LIST'][a])
-       if hash_checked(files.decode(),error.decode()) == True:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
+       if a == 'main.py':continue
+       files = link(data['LIST'][a]).decode().replace('\r','')
+       if hash_checked(files,error.decode()) == True:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
        else:
            path = os.getcwd()
-           if hash_checked(files,read(path+data["LIST"][a])) == False:threading.Thread(target=write,args=(path+data["LIST"][a],files)).start(); print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . ."); c = 1
+           if hash_checked(files,read(path+data["LIST"][a])[0]) == False:
+            if read(path+data["LIST"][a])[0] == files:print("GONE PLS")
+            else:
+               print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . .")
+               threading.Thread(target=write,args=(path+data["LIST"][a],files)).start()
+           #if hash_checked(files,read(path+data["LIST"][a])) == False:
+           #  threading.Thread(target=write,args=(path+data["LIST"][a],files)).start(); print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . ."); c = 1
+           c = 1
     if c == 1:return True
 
 if list_update() == True:print("RESTART PROGRAM!")
