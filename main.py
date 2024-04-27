@@ -52,10 +52,10 @@ def link(path,l='https://raw.githubusercontent.com/Hex1629/API_DOSvNEW'):c = pat
 
 def read(path):
   try:
-   with open(path,'r') as f:return f.read(),'R'; print("r")
+   with open(path,'r') as f:return f.read(); print("r")
   except:
     try:
-      with open(path,'rb') as f:return f.read(),'RB'; print("RB")
+      with open(path,'rb') as f:return f.read(); print("RB")
     except:return False
 
 def write(path,contents):
@@ -89,11 +89,11 @@ def list_update():
        if hash_checked(files,error.decode()) == True:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
        else:
            path = os.getcwd()
-           file_data, mode = read(path+data["LIST"][a])
+           file_data = read(path+data["LIST"][a])
            if hash_checked(files,file_data) == False:
             if file_data == files:print("GONE PLS")
             else:
-               print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE {mode} . . .")
+               print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . .")
                threading.Thread(target=write,args=(path+data["LIST"][a],files)).start(); c = 1
            else:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} UPDATE BEFORE. . .")
     if c == 1:return True
