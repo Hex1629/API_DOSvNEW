@@ -48,7 +48,7 @@ def epoch_to_datetime(epoch_time):
     datetime_obj = datetime.datetime.fromtimestamp(epoch_time)
     return datetime_obj.strftime('%Y-%m-%d %H:%M:%S')
 
-def link(path):return requests.get(f"https://raw.githubusercontent.com/Tool-Free/api_assets/main{path}").content
+def link(path):return requests.get(f"https://raw.githubusercontent.com/Tool-Free/api_assets/main{path.replace('\\','/)}").content
 
 def read(path):
   try:
@@ -89,6 +89,7 @@ def list_update():
            path = os.getcwd()
            if "/home/runner" not in path:
                path = os.path.dirname(path)
+           print(path+data["LIST"][a])
            if hash_checked(files,read(path+data["LIST"][a])) == False:threading.Thread(target=write,args=(path+data["LIST"][a],files)).start(); print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . ."); c = 1
     if c == 1:return True
 
