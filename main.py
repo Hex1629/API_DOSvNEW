@@ -48,7 +48,7 @@ def epoch_to_datetime(epoch_time):
     datetime_obj = datetime.datetime.fromtimestamp(epoch_time)
     return datetime_obj.strftime('%Y-%m-%d %H:%M:%S')
 
-def link(path):return requests.get(f"https://raw.githubusercontent.com/Tool-Free/api_assets/main{path.replace('\\','/')}").content
+def link(path):c = path.replace('\\','/');return requests.get(f"https://raw.githubusercontent.com/Tool-Free/api_assets/main{c}").content
 
 def read(path):
   try:
@@ -84,7 +84,7 @@ def list_update():
     error = link("a")
     for a in data["LIST"].keys():
        files = link(data['LIST'][a])
-       if files == error:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
+       if files != error:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
        else:
            path = os.getcwd()
            if "/home/runner" not in path:
