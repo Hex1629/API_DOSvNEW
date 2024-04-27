@@ -94,7 +94,7 @@ def list_update():
            path.append(lst[c])
            name = lst[c]; c += 1
          except:break
-        files_c = '/'.join(path)+'/'+name
+        files_c = '/'.join(path)
        files = link(data['LIST'][a])
        if files == error:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
        else:
