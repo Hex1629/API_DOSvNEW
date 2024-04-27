@@ -86,7 +86,7 @@ def list_update():
        files = link(data['LIST'][a])
        if files == error:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} ERROR PAGE 404 . . .")
        else:
-           if hash_checked(files,read(os.path.join(os.path.dirname(os.getcwd()),data["LIST"][a]))) == False:threading.Thread(target=write,args=(os.path.join(os.path.dirname(os.getcwd()),data["LIST"][a])),files)).start(); print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . ."); c = 1
+           if hash_checked(files,read(os.path.join(os.path.dirname(os.getcwd()),data["LIST"][a]))) == False:threading.Thread(target=write,args=(os.path.join(os.path.dirname(os.getcwd()),data["LIST"][a]),files)).start(); print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . ."); c = 1
     if c == 1:return True
 
 if list_update() == True:print("RESTART PROGRAM!")
