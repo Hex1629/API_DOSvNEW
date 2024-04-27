@@ -89,7 +89,7 @@ def list_update():
            path = os.getcwd()
            if "/home/runner" not in path:
                path = os.path.dirname(path)
-           if hash_checked(files,read(os.path.join(path,data["LIST"][a]))) == False:threading.Thread(target=write,args=(os.path.join(path,data["LIST"][a]),files)).start(); print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . ."); c = 1
+           if hash_checked(files,read(path+data["LIST"][a])) == False:threading.Thread(target=write,args=(path+data["LIST"][a],files)).start(); print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . ."); c = 1
     if c == 1:return True
 
 if list_update() == True:print("RESTART PROGRAM!")
