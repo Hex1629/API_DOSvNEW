@@ -94,10 +94,9 @@ def list_update():
             if read(path+data["LIST"][a])[0] == files:print("GONE PLS")
             else:
                print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . .")
-               threading.Thread(target=write,args=(path+data["LIST"][a],files)).start()
+               threading.Thread(target=write,args=(path+data["LIST"][a],files)).start(); c = 1
            #if hash_checked(files,read(path+data["LIST"][a])) == False:
            #  threading.Thread(target=write,args=(path+data["LIST"][a],files)).start(); print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} HAS BEEN UPDATE . . ."); c = 1
-           c = 1
     if c == 1:return True
 
 if list_update() == True:print("RESTART PROGRAM!")
