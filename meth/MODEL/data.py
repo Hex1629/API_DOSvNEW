@@ -2,7 +2,7 @@ from urllib.parse import urlparse
 import random,string,os,sys
 
 def read():
-    with open(os.getcwd()+"\\meth\\STOP.txt","r") as f:
+    with open(os.getcwd()+"\\meth\\MODEL\\STOP.txt","r") as f:
         if f.read().upper() in ['YES','TRUE']:
             return True
         else:return False
