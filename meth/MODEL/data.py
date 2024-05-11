@@ -41,7 +41,10 @@ def gen_id():
     return '-'.join(''.join(random.choice(letter) for _ in range(length)) for length in lengths)
 
 def generate_url_path(string=string.ascii_letters+string.digits+string.punctuation+'กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮ๐๑๒๓๔๕๖๗๘๙',num=1):
-    data = "".join(random.sample(list(str(string)), int(num)))
+    if num <= 0 or num > len(string):
+        data = "".join([random.choice((string)) for _ in range(num)])
+    else:
+        data = "".join(random.sample(list(str(string)), int(num)))
     return data
 
 def random_useragent():
