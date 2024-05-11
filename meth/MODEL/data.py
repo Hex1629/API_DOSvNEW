@@ -35,10 +35,11 @@ def get_command(files,meth='BROWSER'):
 def gen_ips():
     return '.'.join(str(random.randint(0, 255)) for _ in range(4))
 
-def gen_id():
-    letter = 'abcdefghijklmnopqrstuvwxyz0123456789'
-    lengths = [8, 4, 4, 4, 12]
-    return '-'.join(''.join(random.choice(letter) for _ in range(length)) for length in lengths)
+def gen_id(id=''):
+    letters_and_digits = string.ascii_lowercase + string.digits
+    if id:generated_id = ''.join(random.choice(letters_and_digits) for _ in range(id))
+    else:generated_id = '-'.join([''.join(random.choice(letters_and_digits) for _ in range(length)) for length in [8, 4, 4, 4, 12]])
+    return generated_id
 
 def generate_url_path(string=string.ascii_letters+string.digits+string.punctuation+'กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮ๐๑๒๓๔๕๖๗๘๙',num=1):
     if num <= 0 or num > len(string):
