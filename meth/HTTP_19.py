@@ -1,4 +1,5 @@
 import socket,threading,random,string,sys
+from MODEL.data import read
 
 def http_flood(ip,port,method,count):
     for _ in range(count):
