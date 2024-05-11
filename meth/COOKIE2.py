@@ -57,5 +57,5 @@ for _ in range(int(thread_lower)):
    if read() == True:break
    for _ in range(10):
         if read() == True:break
-         threading.Thread(target=CONNECT,args=(t,time_booter,craft(mode_uam,url,num,"\r\n",t))).start()
+        threading.Thread(target=CONNECT,args=(t,time_booter,craft(mode_uam,url,num,"\r\n",t))).start()
    num += 1
