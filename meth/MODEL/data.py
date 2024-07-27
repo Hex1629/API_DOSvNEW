@@ -4,8 +4,8 @@ import random,string,os,sys
 def read():
     with open(os.getcwd()+"/meth/STOP.txt","r") as f:
         if f.read().upper().replace('\n','') in ['YES','TRUE']:
-            return False
-        else:return True
+            return True
+        else:return False
 
 def get_target(url2):
     url = url2.rstrip()
