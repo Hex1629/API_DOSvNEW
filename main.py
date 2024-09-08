@@ -20,13 +20,10 @@ def stop():
 @app.route('/STATUS')
 def status():
     data = ''
-    c = 1
     with open(os.getcwd()+"/meth/STOP.txt","r") as f:
         data = f.read().upper().replace("\n","")
-    with open(os.getcwd()+"/meth/STOP.txt","w") as f:
-        if data in ['YES','TRUE']:f.write("NO"); c = 0
-        else:f.write("YES")
-    return f'{data} --> {c}'
+        if data in ['YES','TRUE']:return 'STOPPED'
+        else:return 'RUNNING'
 
 @app.route('/target=<TARGET>&time=<TIME>&threads=<THREAD>&methods=<METHODS>')
 def req(TARGET, TIME, THREAD, METHODS):
