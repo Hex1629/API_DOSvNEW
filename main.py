@@ -28,7 +28,7 @@ def status():
 @app.route('/target=<TARGET>&time=<TIME>&threads=<THREAD>&methods=<METHODS>')
 def req(TARGET, TIME, THREAD, METHODS):
     upper_methods = METHODS.upper()
-    if upper_methods in ['HTTP-19','HTTP-Var','HTTP-Fu','HTTP-Ele', 'BROWSER', 'HANDSHAKE', 'AMP', 'MURD-OPT','MURD','RAPID-FAST','COOKIE2','COOKIE']:
+    if upper_methods in ['HTTP-19','HTTP-VAR','HTTP-FU','HTTP-ELE', 'BROWSER', 'HANDSHAKE', 'AMP', 'MURD-OPT','MURD','RAPID-FAST','COOKIE2','COOKIE']:
         ports_opt = request.headers.get('X-Port')
         if ports_opt is None: ports_opt = 80
         meth_opt = request.headers.get('X-Methods')
@@ -42,9 +42,9 @@ def req(TARGET, TIME, THREAD, METHODS):
         proxy = request.headers.get('X-Browser')
         com = ''
         folder = 'meth/'
-        if upper_methods in ['HTTP-19','HTTP-Var','HTTP-Fu']:
+        if upper_methods in ['HTTP-19','HTTP-VAR','HTTP-FU']:
             com = f"python {folder}{upper_methods.replace('-','_')}.py {TARGET} {ports_opt} {THREAD} {TIME} {meth_opt}"
-        elif upper_methods == 'HTTP-Ele':
+        elif upper_methods == 'HTTP-ELE':
             com = f"python {folder}{upper_methods.replace('-','_')}.py {TARGET} {ports_opt} {THREAD} {meth_opt}"
         elif upper_methods in ['AMP','HANDSHAKE']:
             com = f"python {folder}{upper_methods.replace('-','_')}.py {protocols}://{TARGET}{links} {THREAD} {TIME} {meth_opt}"
