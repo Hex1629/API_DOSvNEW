@@ -41,14 +41,14 @@ def req(TARGET, TIME, THREAD, METHODS):
         if links is None:links = '/'
         proxy = request.headers.get('X-Browser')
         folder = 'meth/'
-        com = f'python {folder}{upper_methods.replace('-','_')}.py '
+        com = f"python {folder}{upper_methods.replace('-','_')}.py "
         if upper_methods in ['HTTP-19','HTTP-VAR','HTTP-FU']:
             com += f"{TARGET} {ports_opt} {THREAD} {TIME} {meth_opt}"
         elif upper_methods == 'HTTP-ELE':
             com += f"{TARGET} {ports_opt} {THREAD} {meth_opt}"
         else:
             if upper_methods in ['MURD-OPT','MURD','RAPID-FAST']:
-              com = f"python {folder}{upper_methods.replace('-','_')}.py {protocols}://{TARGET}{links} {THREAD} {meth_opt}"
+              com += f"{protocols}://{TARGET}{links} {THREAD} {meth_opt}"
             else:
              com += f"{protocols}://{TARGET}{links} {THREAD} {TIME} {meth_opt}"
              if upper_methods == 'BROWSER':
